@@ -5,7 +5,7 @@
 	SubShader {
 		Tags { "RenderType"="Transparent" "Queue"="Transparent" "IgnoreProjector"="True" }
 		LOD 200
-		Cull Off Lighting Off ZWrite Off Fog { Mode Off }
+		Cull Off Lighting Off ZWrite Off ZTest LEqual Fog { Mode Off }
 		Blend One One
 		
 		Pass {

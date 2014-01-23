@@ -35,7 +35,7 @@
 			
 			float4 frag(vs2ps i) : COLOR {
 				 float4 c = tex2D(_MainTex, i.uv);
-				 return c.a;
+				 return float4(c.a, c.a, c.a, c.a);
 			}
 			ENDCG
 		}
