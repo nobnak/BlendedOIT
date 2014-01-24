@@ -37,9 +37,9 @@ public class OIT : MonoBehaviour {
 	void OnPreRender() {
 		var width = Screen.width;
 		var height = Screen.height;
-		_opaqueTex = RenderTexture.GetTemporary(width, height, 24, RenderTextureFormat.ARGB32);
-		_accumTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGBHalf);
-		_revealageTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGBHalf);
+		_opaqueTex = RenderTexture.GetTemporary(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
+		_accumTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
+		_revealageTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
 
 		_renderCam.targetTexture = _opaqueTex;
 		_renderCam.backgroundColor = Color.black;
