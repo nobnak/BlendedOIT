@@ -7,6 +7,7 @@ public class OIT : MonoBehaviour {
 	public Shader revealageShader;
 	public Shader postEffectShader;
 	public bool	oitEnabled;
+	public bool weightEnabled;
 
 	private Camera _renderCam;
 	private GameObject _renderGO;
@@ -30,6 +31,7 @@ public class OIT : MonoBehaviour {
 		_layerOpaque = LayerMask.NameToLayer("Default");
 		_layerTransparent = LayerMask.NameToLayer("TransparentFX");
 		_postEffectMat = new Material(postEffectShader);
+		Shader.SetGlobalFloat("_Weight", (weightEnabled ? -5f : 0f));
 	}
 
 	void OnPreRender() {
@@ -83,7 +85,14 @@ public class OIT : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		oitEnabled = GUILayout.Toggle(oitEnabled, "Enable OIT");
+		GUILayout.BeginVertical();
+		oitEnabled = GUILayout.Button(string.Format("OIT {0}", (oitEnabled ? "Enabled" : "Disabled"))) == true ? !oitEnabled : oitEnabled;
+		var weightEnabled1 = GUILayout.Button(string.Format("Weight {0}", (weightEnabled ? "Enabled" : "Disabled"))) == true ? !weightEnabled : weightEnabled;
+		if (weightEnabled != weightEnabled1) {
+			weightEnabled = weightEnabled1;
+			Shader.SetGlobalFloat("_Weight", (weightEnabled ? -5f : 0f));
+		}
+		GUILayout.EndVertical();
 	}
 
 	void OnDisable() {
