@@ -2,6 +2,8 @@ Order-Independent Transparency for Unity
 ==========
 * OIT(Order-Independent Transparency)[1]
 
+[![ScreenShot](Img/Screenshot01.jpg)](https://vimeo.com/114411019)
+
 [Demo](http://nobnak.github.io/SceneSamples/SimpleBlendedOIT/SimpleBlendedOIT.html)
 
 ## References
