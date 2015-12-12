@@ -17,11 +17,13 @@
 
 		struct appdata {
 			float4 vertex : POSITION;
+			float4 color : COLOR;
 			float2 uv : TEXCOORD0;
 		};
 		
 		struct vs2ps {
 			float4 vertex : POSITION;
+			float4 color : COLOR;
 			float2 uv : TEXCOORD0;			
 			float z : TEXCOORD1;
 		};
@@ -33,6 +35,7 @@
 			o.vertex = mul(UNITY_MATRIX_P, v);
 			o.uv = i.uv;
 			o.z = abs(v.z);
+			o.color = i.color;
 			return o;
 		}
 		
@@ -41,8 +44,8 @@
 		}
 		
 		float4 frag(vs2ps i) : COLOR {
-			 float4 c = tex2D(_MainTex, i.uv);
-			 return c * w(i.z);
+			 float4 c = tex2D(_MainTex, i.uv) * i.color;
+			 return w(i.z) * c;
 		}
 		ENDCG
 		
