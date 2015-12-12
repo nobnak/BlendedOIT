@@ -35,7 +35,7 @@
 			o.vertex = mul(UNITY_MATRIX_P, v);
 			o.uv = i.uv;
 			o.z = abs(v.z);
-			o.color = i.color;
+			o.color = float4(i.color.rgb * i.color.a, i.color.a);
 			return o;
 		}
 		
