@@ -11,23 +11,25 @@ namespace OIT {
     	public bool	oitEnabled;
     	public bool weightEnabled;
 
-    	private Camera _renderCam;
-    	private GameObject _renderGO;
+        Camera _attachedCam;
+    	Camera _renderCam;
+    	GameObject _renderGO;
 
-    	private int _layerOpaque;
-    	private int _layerTransparent;
+    	int _layerOpaque;
+    	int _layerTransparent;
 
-    	private RenderTexture _opaqueTex;
-    	private RenderTexture _accumTex;
-    	private RenderTexture _revealageTex;
+    	RenderTexture _opaqueTex;
+    	RenderTexture _accumTex;
+    	RenderTexture _revealageTex;
 
-    	private Material _postEffectMat;
+    	Material _postEffectMat;
 
     	void OnEnable() {
+            _attachedCam = GetComponent<Camera>();
     		_renderGO = new GameObject();
     		_renderGO.transform.parent = transform;
     		_renderCam = _renderGO.AddComponent<Camera>();
-    		_renderCam.CopyFrom(GetComponent<Camera>());
+            _renderCam.CopyFrom(_attachedCam);
     		_renderCam.enabled = false;
     		_renderCam.clearFlags = CameraClearFlags.Nothing;
     		_layerOpaque = LayerMask.NameToLayer("Default");
@@ -37,15 +39,15 @@ namespace OIT {
     	}
 
     	void OnPreRender() {
-    		var width = Screen.width;
-    		var height = Screen.height;
+            var width = Screen.width;
+            var height = Screen.height;
     		_opaqueTex = RenderTexture.GetTemporary(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
     		_accumTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
             _revealageTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.RHalf, RenderTextureReadWrite.Linear);
 
     		_renderCam.targetTexture = _opaqueTex;
-    		_renderCam.backgroundColor = Color.black;
-    		_renderCam.clearFlags = CameraClearFlags.SolidColor;
+            _renderCam.backgroundColor =_attachedCam.backgroundColor;
+            _renderCam.clearFlags = _attachedCam.clearFlags;
     		_renderCam.cullingMask = 1 << _layerOpaque;
     		_renderCam.Render();
 
