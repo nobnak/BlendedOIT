@@ -25,7 +25,7 @@ public class OIT : MonoBehaviour {
 		_renderGO = new GameObject();
 		_renderGO.transform.parent = transform;
 		_renderCam = _renderGO.AddComponent<Camera>();
-		_renderCam.CopyFrom(camera);
+		_renderCam.CopyFrom(GetComponent<Camera>());
 		_renderCam.enabled = false;
 		_renderCam.clearFlags = CameraClearFlags.Nothing;
 		_layerOpaque = LayerMask.NameToLayer("Default");
