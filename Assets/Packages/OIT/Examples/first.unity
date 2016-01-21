@@ -85,79 +85,6 @@ NavMeshSettings:
     cellSize: 0.16666666
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1454423893
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1454423894}
-  - 114: {fileID: 1454423895}
-  m_Layer: 0
-  m_Name: Plates
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1454423894
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1454423893}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
---- !u!114 &1454423895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1454423893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecf7b77a214b46d4e891e6783df7cf38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platefab: {fileID: 147202, guid: b523035270a38ef4b8d924922e27852e, type: 2}
-  plateDataset:
-  - color:
-      r: 1
-      g: 0.48400003
-      b: 0.48400003
-      a: 0.141
-    texture: {fileID: 0}
-  - color:
-      r: 0.96491194
-      g: 1
-      b: 0.48400003
-      a: 0.141
-    texture: {fileID: 0}
-  - color:
-      r: 0.48400003
-      g: 1
-      b: 0.544888
-      a: 0.141
-    texture: {fileID: 0}
-  - color:
-      r: 0.48400003
-      g: 0.913312
-      b: 1
-      a: 0.141
-    texture: {fileID: 0}
-  - color:
-      r: 0.847264
-      g: 0.48400003
-      b: 1
-      a: 0.141
-    texture: {fileID: 0}
-  speed: -4
-  space: 2
 --- !u!1 &2029828321
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,12 +122,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2029828321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f34538c338b6f6e4ebe79a2e32437704, type: 3}
+  m_Script: {fileID: 11500000, guid: e7c24bdcdb4aa6342819fad090e189bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accumShader: {fileID: 4800000, guid: af4206311b73ef4489d6b7b8fce0c185, type: 3}
-  revealageShader: {fileID: 4800000, guid: 05d435478ee6db845aee84771008a2dc, type: 3}
-  postEffectShader: {fileID: 4800000, guid: 4249cd976ff7d0d40b9c0c74386aa693, type: 3}
+  accumShader: {fileID: 4800000, guid: 94f93dfae8018524d880e8218964ee83, type: 3}
+  revealageShader: {fileID: 4800000, guid: 96823bb75bbfce5418cb1f6738077db9, type: 3}
+  postEffectShader: {fileID: 4800000, guid: b71cb7b1b7e814b42b964dd0a3ce6f92, type: 3}
   oitEnabled: 0
   weightEnabled: 0
 --- !u!20 &2029828327
