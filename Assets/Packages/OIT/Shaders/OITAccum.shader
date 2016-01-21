@@ -44,7 +44,7 @@
 		}
 		
 		float4 frag(vs2ps i) : COLOR {
-			 float4 c = tex2D(_MainTex, i.uv);
+			 float4 c = tex2D(_MainTex, i.uv) * i.color;
 			 return w(i.z) * c;
 		}
 		ENDCG
