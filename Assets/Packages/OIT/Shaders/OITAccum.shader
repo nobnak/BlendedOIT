@@ -33,7 +33,8 @@
 		
 			vs2ps o;
 			o.vertex = mul(UNITY_MATRIX_P, v);
-			o.color = float4(i.color.rgb * i.color.a, i.color.a);
+			//o.color = float4(i.color.rgb * i.color.a, i.color.a);
+			o.color = i.color * i.color.a;
 			o.uv = i.uv;
 			o.z = abs(v.z);
 			return o;

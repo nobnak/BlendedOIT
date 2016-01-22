@@ -31,7 +31,8 @@
 			vs2ps vert(appdata i) {
 				vs2ps o;
 				o.vertex = mul(UNITY_MATRIX_MVP, i.vertex);
-				o.color = float4(i.color.rgb * i.color.a, i.color.a);
+				//o.color = float4(i.color.rgb * i.color.a, i.color.a);
+				o.color = i.color * i.color.a;
 				o.uv = i.uv;
 				return o;
 			}

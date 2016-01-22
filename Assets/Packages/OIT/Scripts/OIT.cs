@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace OIT {
 
+	[ExecuteInEditMode]
     [RequireComponent(typeof(Camera))]
     public class OIT : MonoBehaviour {
     	public Shader accumShader;
@@ -24,7 +25,7 @@ namespace OIT {
 
     	Material _postEffectMat;
 
-    	void OnEnable() {
+    	void Awake() {
             _attachedCam = GetComponent<Camera>();
     		_renderGO = new GameObject();
     		_renderGO.transform.parent = transform;
@@ -36,6 +37,10 @@ namespace OIT {
 			weight = Mathf.Min(0f, weight);
 			Shader.SetGlobalFloat("_Weight", (weightEnabled ? weight : 0f));
     	}
+		void OnDestroy() {
+			DestroyImmediate(_renderGO);
+			DestroyImmediate(_postEffectMat);
+		}
 
     	void OnPreRender() {
             var width = Screen.width;
@@ -94,11 +99,6 @@ namespace OIT {
     		weight = Mathf.Min(0f, weight);
 			Shader.SetGlobalFloat("_Weight", (weightEnabled ? weight : 0f));
     		GUILayout.EndVertical();
-    	}
-
-    	void OnDisable() {
-    		Destroy(_renderGO);
-    		Destroy(_postEffectMat);
     	}
     }
 }
