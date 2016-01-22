@@ -109,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 156358675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35f6cb52c4d22da47b432efc56a922d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d0f892f7e50940468afb6819bf19591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: {x: 0, y: 60, z: 0}
@@ -196,7 +196,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f190b15788965e64598174d13521a0f3, type: 2}
+  - {fileID: 2100000, guid: f6c4ada37d18fae45825a07ee7b5983a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1889,7 +1889,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f190b15788965e64598174d13521a0f3, type: 2}
+  - {fileID: 2100000, guid: f6c4ada37d18fae45825a07ee7b5983a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3470,7 +3470,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f190b15788965e64598174d13521a0f3, type: 2}
+  - {fileID: 2100000, guid: f6c4ada37d18fae45825a07ee7b5983a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -5095,12 +5095,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514433437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c24bdcdb4aa6342819fad090e189bf, type: 3}
+  m_Script: {fileID: 11500000, guid: f34538c338b6f6e4ebe79a2e32437704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accumShader: {fileID: 4800000, guid: 94f93dfae8018524d880e8218964ee83, type: 3}
-  revealageShader: {fileID: 4800000, guid: 96823bb75bbfce5418cb1f6738077db9, type: 3}
-  postEffectShader: {fileID: 4800000, guid: b71cb7b1b7e814b42b964dd0a3ce6f92, type: 3}
+  accumShader: {fileID: 4800000, guid: af4206311b73ef4489d6b7b8fce0c185, type: 3}
+  revealageShader: {fileID: 4800000, guid: 05d435478ee6db845aee84771008a2dc, type: 3}
+  postEffectShader: {fileID: 4800000, guid: 4249cd976ff7d0d40b9c0c74386aa693, type: 3}
   oitEnabled: 0
   weightEnabled: 0
 --- !u!1 &1930802929
@@ -5142,7 +5142,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f190b15788965e64598174d13521a0f3, type: 2}
+  - {fileID: 2100000, guid: f6c4ada37d18fae45825a07ee7b5983a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
