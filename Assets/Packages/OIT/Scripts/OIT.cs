@@ -10,13 +10,13 @@ namespace OIT {
     	public Shader postEffectShader;
     	public bool	oitEnabled;
     	public bool weightEnabled;
+		public float weight = -5f;
+		public LayerMask _layerOpaque = 1 << 0;
+		public LayerMask _layerTransparent = 1 << 1;
 
         Camera _attachedCam;
     	Camera _renderCam;
     	GameObject _renderGO;
-
-    	int _layerOpaque;
-    	int _layerTransparent;
 
     	RenderTexture _opaqueTex;
     	RenderTexture _accumTex;
@@ -32,10 +32,9 @@ namespace OIT {
             _renderCam.CopyFrom(_attachedCam);
     		_renderCam.enabled = false;
     		_renderCam.clearFlags = CameraClearFlags.Nothing;
-    		_layerOpaque = LayerMask.NameToLayer("Default");
-    		_layerTransparent = LayerMask.NameToLayer("TransparentFX");
     		_postEffectMat = new Material(postEffectShader);
-    		Shader.SetGlobalFloat("_Weight", (weightEnabled ? -5f : 0f));
+			weight = Mathf.Min(0f, weight);
+			Shader.SetGlobalFloat("_Weight", (weightEnabled ? weight : 0f));
     	}
 
     	void OnPreRender() {
@@ -48,7 +47,7 @@ namespace OIT {
     		_renderCam.targetTexture = _opaqueTex;
             _renderCam.backgroundColor =_attachedCam.backgroundColor;
             _renderCam.clearFlags = _attachedCam.clearFlags;
-    		_renderCam.cullingMask = 1 << _layerOpaque;
+    		_renderCam.cullingMask = _layerOpaque;
     		_renderCam.Render();
 
     		_renderCam.targetTexture = _accumTex;
@@ -58,7 +57,7 @@ namespace OIT {
     		_renderCam.Render();
     		_renderCam.SetTargetBuffers(_accumTex.colorBuffer, _opaqueTex.depthBuffer);
     		_renderCam.clearFlags = CameraClearFlags.Nothing;
-    		_renderCam.cullingMask = 1 << _layerTransparent;
+    		_renderCam.cullingMask = _layerTransparent;
     		_renderCam.RenderWithShader(accumShader, null);
 
     		_renderCam.targetTexture = _revealageTex;
@@ -68,7 +67,7 @@ namespace OIT {
     		_renderCam.Render();
     		_renderCam.SetTargetBuffers(_revealageTex.colorBuffer, _opaqueTex.depthBuffer);
     		_renderCam.clearFlags = CameraClearFlags.Nothing;
-    		_renderCam.cullingMask = 1 << _layerTransparent;
+    		_renderCam.cullingMask = _layerTransparent;
     		_renderCam.RenderWithShader(revealageShader, null);
     	}
     	
@@ -91,11 +90,9 @@ namespace OIT {
     	void OnGUI() {
     		GUILayout.BeginVertical();
     		oitEnabled = GUILayout.Button(string.Format("OIT {0}", (oitEnabled ? "Enabled" : "Disabled"))) == true ? !oitEnabled : oitEnabled;
-    		var weightEnabled1 = GUILayout.Button(string.Format("Weight {0}", (weightEnabled ? "Enabled" : "Disabled"))) == true ? !weightEnabled : weightEnabled;
-    		if (weightEnabled != weightEnabled1) {
-    			weightEnabled = weightEnabled1;
-    			Shader.SetGlobalFloat("_Weight", (weightEnabled ? -5f : 0f));
-    		}
+    		weightEnabled = GUILayout.Button(string.Format("Weight {0}", (weightEnabled ? "Enabled" : "Disabled"))) == true ? !weightEnabled : weightEnabled;
+    		weight = Mathf.Min(0f, weight);
+			Shader.SetGlobalFloat("_Weight", (weightEnabled ? weight : 0f));
     		GUILayout.EndVertical();
     	}
 
