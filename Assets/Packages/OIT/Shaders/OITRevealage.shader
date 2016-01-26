@@ -36,10 +36,13 @@
 				o.uv = i.uv;
 				return o;
 			}
-			
+						
 			float4 frag(vs2ps i) : COLOR {
-				 float4 c = tex2D(_MainTex, i.uv) * i.color;
-				 return float4(c.a, c.a, c.a, c.a);
+				 float4 c = tex2D(_MainTex, i.uv);
+				 #ifdef PREMULTIPLIED_ALPHA_OFF
+				 c.rgb *= c.a;
+				 #endif
+				 return i.color * c.a;
 			}
 			ENDCG
 		}

@@ -6,6 +6,15 @@ namespace OIT {
 	[ExecuteInEditMode]
     [RequireComponent(typeof(Camera))]
     public class OIT : MonoBehaviour {
+		public const string KW_PREMULT_ON = "PREMULTIPLIED_ALPHA_ON";
+		public const string KW_PREMULT_OFF = "PREMULTIPLIED_ALPHA_OFF";
+
+		public enum TransparentModeEnum { PremultAlpha = 0, NotPremultAlpha }
+		public enum UIModeEnum { Hidden = 0, Visible }
+
+		public TransparentModeEnum transparentMode;
+		public UIModeEnum uiMode;
+		public KeyCode uikey = KeyCode.T;
     	public Shader accumShader;
     	public Shader revealageShader;
     	public Shader postEffectShader;
@@ -27,13 +36,19 @@ namespace OIT {
 
     	void Awake() {
             _attachedCam = GetComponent<Camera>();
-    		_renderGO = new GameObject();
-    		_renderGO.transform.parent = transform;
-    		_renderCam = _renderGO.AddComponent<Camera>();
-            _renderCam.CopyFrom(_attachedCam);
-    		_renderCam.enabled = false;
-    		_renderCam.clearFlags = CameraClearFlags.Nothing;
-    		_postEffectMat = new Material(postEffectShader);
+			if (_renderGO == null) {
+	    		_renderGO = new GameObject();
+				_renderGO.hideFlags = HideFlags.DontSave;
+				_renderGO.transform.SetParent(transform, false);
+	    		_renderCam = _renderGO.AddComponent<Camera>();
+	            _renderCam.CopyFrom(_attachedCam);
+	    		_renderCam.enabled = false;
+	    		_renderCam.clearFlags = CameraClearFlags.Nothing;
+			}
+			if (_postEffectMat == null) {
+    			_postEffectMat = new Material(postEffectShader);
+				_postEffectMat.hideFlags = HideFlags.DontSave;
+			}
 			weight = Mathf.Min(0f, weight);
 			Shader.SetGlobalFloat("_Weight", (weightEnabled ? weight : 0f));
     	}
@@ -48,6 +63,17 @@ namespace OIT {
     		_opaqueTex = RenderTexture.GetTemporary(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
     		_accumTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
             _revealageTex = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.RHalf, RenderTextureReadWrite.Linear);
+
+			switch (transparentMode) {
+			case TransparentModeEnum.NotPremultAlpha:
+				Shader.DisableKeyword(KW_PREMULT_ON);
+				Shader.EnableKeyword(KW_PREMULT_OFF);
+				break;
+			case TransparentModeEnum.PremultAlpha:
+				Shader.DisableKeyword(KW_PREMULT_OFF);
+				Shader.EnableKeyword(KW_PREMULT_ON);
+				break;
+			}
 
     		_renderCam.targetTexture = _opaqueTex;
             _renderCam.backgroundColor =_attachedCam.backgroundColor;
@@ -91,8 +117,16 @@ namespace OIT {
     		RenderTexture.ReleaseTemporary(_accumTex);
     		RenderTexture.ReleaseTemporary(_revealageTex);
     	}
+		void Update() {
+			if (Input.GetKeyDown(uikey)) {
+				uiMode = (UIModeEnum)(((int)uiMode + 1) % 2);
+			}
+		}
 
     	void OnGUI() {
+			if (uiMode == UIModeEnum.Hidden)
+				return;
+			
     		GUILayout.BeginVertical();
     		oitEnabled = GUILayout.Button(string.Format("OIT {0}", (oitEnabled ? "Enabled" : "Disabled"))) == true ? !oitEnabled : oitEnabled;
     		weightEnabled = GUILayout.Button(string.Format("Weight {0}", (weightEnabled ? "Enabled" : "Disabled"))) == true ? !weightEnabled : weightEnabled;
