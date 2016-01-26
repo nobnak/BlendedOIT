@@ -99,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5362780
 Transform:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &293384461
 Transform:
   m_ObjectHideFlags: 0
@@ -731,7 +731,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 10
   m_Depth: -1
   m_CullingMask:
@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34538c338b6f6e4ebe79a2e32437704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparentMode: 1
+  transparentMode: 0
   uiMode: 1
   uikey: 116
   accumShader: {fileID: 4800000, guid: af4206311b73ef4489d6b7b8fce0c185, type: 3}
